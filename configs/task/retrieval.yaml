@@ -1,0 +1,15 @@
+# Video retrieval task configuration
+
+task:
+  name: "retrieval"
+  description: "Text-to-Video Retrieval"
+  
+dedup:
+  threshold: 0.75  # More aggressive dedup
+  max_frames: 8
+
+retrieval:
+  top_k: 5
+  use_text_embedding: true
+  similarity_metric: "cosine"
+

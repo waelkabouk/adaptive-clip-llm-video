@@ -1,0 +1,19 @@
+# Configuration for local tiny VLM inference
+# For offline demos or when API is unavailable
+
+encoder:
+  device: "cuda"
+  batch_size: 4  # Very conservative
+  auto_batch_scale: true
+
+inference:
+  provider: "local"
+  model: "phi-3.5-vision"  # or llava-phi
+  quantization: "q4_k_m"
+  max_tokens: 512
+  device: "cpu"  # 4GB VRAM too small for VLM
+  
+dedup:
+  threshold: 0.80  # More aggressive dedup for local
+  max_frames: 6  # Fewer frames for local processing
+

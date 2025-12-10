@@ -1,0 +1,63 @@
+# Main Hydra configuration file
+defaults:
+  - _self_
+  - hardware: api_first
+  - task: qa
+
+# Video processing settings
+video:
+  max_duration_seconds: 300  # 5 minutes max
+  max_file_size_mb: 500
+  cache_dir: ".cache/frames"
+  
+# Frame sampling settings
+sampling:
+  strategy: "uniform"  # uniform, fps_cap, scene_detect
+  max_frames: 64
+  fps_cap: 2.0  # For fps_cap strategy
+  uniform_count: 32  # For uniform strategy
+
+# CLIP encoder settings
+encoder:
+  model_name: "ViT-B-32"
+  pretrained: "openai"
+  device: "cpu"  # auto, cuda, cpu (using cpu since torch is CPU-only)
+  batch_size: 8
+  auto_batch_scale: true  # Reduce batch on OOM
+
+# Deduplication settings
+dedup:
+  enabled: true
+  method: "greedy_cosine"  # greedy_cosine, kmeans
+  threshold: 0.85  # Cosine similarity threshold
+  preserve_temporal_order: true
+  min_frames: 4
+  max_frames: 16
+
+# LLM inference settings
+inference:
+  provider: "google"  # openai, anthropic, google, local
+  model: "gemini-1.5-flash"
+  max_tokens: 1024
+  temperature: 0.7
+  max_images: 8  # Max frames to send to LLM
+  fallback_provider: null
+  fallback_model: null
+  timeout_seconds: 60
+
+# Evaluation settings
+evaluation:
+  dataset: "msrvtt_qa"
+  subset_size: 1000
+  metrics:
+    - accuracy
+    - latency
+    - cost
+    - frame_reduction
+
+# Logging settings
+logging:
+  level: "INFO"
+  format: "json"
+  output_dir: "logs"
+

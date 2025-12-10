@@ -1,0 +1,18 @@
+# Configuration for API-first inference (4GB VRAM GPU)
+# Local CLIP encoding + Cloud LLM inference
+
+encoder:
+  device: "cuda"
+  batch_size: 8  # Conservative for 4GB VRAM
+  auto_batch_scale: true
+
+inference:
+  provider: "openai"
+  model: "gpt-4o"
+  fallback_provider: "anthropic"
+  fallback_model: "claude-3-5-sonnet-20241022"
+
+dedup:
+  threshold: 0.85
+  max_frames: 12  # Keep API costs down
+

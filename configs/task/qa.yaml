@@ -1,0 +1,23 @@
+# VideoQA task configuration
+
+task:
+  name: "qa"
+  description: "Video Question Answering"
+  
+dedup:
+  threshold: 0.85
+  max_frames: 12
+
+prompt:
+  system: |
+    You are a video understanding assistant. Analyze the provided video frames 
+    and answer the user's question accurately based on what you observe.
+    Be concise and specific in your answers.
+  
+  user_template: |
+    Here are {num_frames} key frames from a video (timestamps: {timestamps}).
+    
+    Question: {question}
+    
+    Please analyze these frames and provide a clear, accurate answer.
+

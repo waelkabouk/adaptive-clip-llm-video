@@ -1,0 +1,22 @@
+# Video captioning task configuration
+
+task:
+  name: "caption"
+  description: "Video Captioning"
+  
+dedup:
+  threshold: 0.80  # Stricter dedup for captioning
+  max_frames: 16
+
+prompt:
+  system: |
+    You are a video captioning assistant. Generate a clear, descriptive caption 
+    that summarizes the main content and actions in the video.
+  
+  user_template: |
+    Here are {num_frames} key frames from a video in temporal order 
+    (timestamps: {timestamps}).
+    
+    Please generate a comprehensive caption describing what happens in this video.
+    Focus on the main subjects, actions, and any notable events.
+

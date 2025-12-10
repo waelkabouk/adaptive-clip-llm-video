@@ -1,0 +1,24 @@
+# Temporal grounding task configuration
+
+task:
+  name: "temporal"
+  description: "Temporal Grounding"
+  
+dedup:
+  threshold: 0.90  # Looser dedup to preserve temporal info
+  max_frames: 20
+  preserve_temporal_order: true
+
+prompt:
+  system: |
+    You are a temporal grounding assistant. Given video frames with timestamps,
+    identify when specific events or actions occur in the video.
+  
+  user_template: |
+    Here are {num_frames} frames from a video with their timestamps: {timestamps}
+    
+    Query: {query}
+    
+    Please identify the time range(s) when the described event/action occurs.
+    Provide your answer in the format: [start_time - end_time]
+
